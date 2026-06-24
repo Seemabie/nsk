@@ -162,8 +162,8 @@
   .finish-note b{color:var(--ink);font-weight:700}
 
   .tabbar{position:fixed;left:0;right:0;bottom:0;z-index:46;max-width:540px;margin:0 auto;display:flex;background:rgba(255,255,255,.92);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
-  .tabbtn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:9px 4px 8px;font-weight:700;font-size:11px;letter-spacing:.02em;color:var(--ink-3);position:relative}
-  .tabbtn svg{width:23px;height:23px}
+  .tabbtn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 2px 7px;font-weight:700;font-size:10px;letter-spacing:.02em;color:var(--ink-3);position:relative}
+  .tabbtn svg{width:21px;height:21px}
   .tabbtn.on{color:var(--accent-2)}
   .tabbtn.on::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:30px;height:3px;border-radius:0 0 4px 4px;background:var(--accent)}
   .tabbtn .badge{position:absolute;top:6px;right:50%;margin-right:-22px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--issue);color:#fff;font-size:10px;font-weight:700;display:grid;place-items:center}
@@ -242,6 +242,49 @@
   .rep-nophoto{font-size:13px;color:var(--ink-3);margin-top:10px}
   .rep-folder{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-weight:600;font-size:13.5px;color:var(--accent-deep)}
   .rep-folder svg{width:15px;height:15px}
+  .menu-card{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-md);box-shadow:var(--shadow-card);padding:16px;margin-bottom:12px;transition:border-color .2s ease}
+  .menu-card:hover{border-color:var(--accent-soft)}
+  .menu-ic{flex:none;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:var(--accent-tint);border:1px solid var(--accent-soft);color:var(--accent-deep)}
+  .menu-ic svg{width:26px;height:26px}
+  .menu-body{flex:1;min-width:0}
+  .menu-title{display:block;font-weight:700;font-size:17px;color:var(--ink)}
+  .menu-sub{display:block;font-size:13.5px;color:var(--ink-2);margin-top:2px}
+  .menu-chev{flex:none;color:var(--ink-3)}
+  .menu-chev svg{width:20px;height:20px}
+  .menu-soon{text-align:center;color:var(--ink-3);font-size:13px;font-weight:600;padding:10px}
+  .san-back{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:14px;color:var(--ink-2);padding:8px 12px;border-radius:11px;border:1px solid var(--line-2);background:var(--surface);margin-bottom:14px}
+  .san-back svg{width:16px;height:16px}
+  .san-summary{display:flex;align-items:center;justify-content:space-between;gap:14px;background:linear-gradient(180deg,#FFFFFF,#FFFCF6);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow-card);padding:16px 18px;margin-bottom:16px;position:relative;overflow:hidden}
+  .san-summary::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),#FBC65A)}
+  .san-sum-main{display:flex;align-items:baseline;gap:8px}
+  .san-vnum{font-family:'Spline Sans Mono',monospace;font-weight:700;font-size:34px;line-height:1}
+  .san-vnum.good{color:var(--good)}
+  .san-vnum.warn{color:#B7791F}
+  .san-vnum.bad{color:var(--issue)}
+  .san-vlabel{font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:11px;color:var(--ink-3)}
+  .san-sum-side{text-align:right}
+  .san-band{font-weight:700;font-size:13px}
+  .san-band.good{color:var(--good)}
+  .san-band.warn{color:#B7791F}
+  .san-band.bad{color:var(--issue)}
+  .san-prog{font-size:12.5px;color:var(--ink-3);margin-top:3px}
+  .san-num{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:20px}
+  .san-allyes{display:inline-flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:var(--good);background:var(--good-tint);border:1px solid var(--good-line);border-radius:10px;padding:9px 13px;margin-bottom:12px}
+  .san-allyes svg{width:15px;height:15px}
+  .san-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line)}
+  .san-item:last-child{border-bottom:none}
+  .san-text{flex:1;font-size:14.5px;line-height:1.35;color:var(--ink)}
+  .san-yn{flex:none;display:flex;gap:6px}
+  .yn{min-width:48px;padding:8px 11px;border-radius:10px;border:1.5px solid var(--line-2);background:var(--surface);font-weight:700;font-size:13px;color:var(--ink-2)}
+  .yn.on-yes{background:var(--good);border-color:var(--good);color:#fff}
+  .yn.on-no{background:var(--issue);border-color:var(--issue);color:#fff}
+  .san-done{text-align:center;padding:30px 16px 20px}
+  .san-done .big{width:96px;height:96px;border-radius:50%;background:var(--good-tint);border:2px solid var(--good-line);display:grid;place-items:center;color:var(--good);margin:0 auto 20px}
+  .san-done .big.flagged{background:var(--issue-tint);border-color:var(--issue-line);color:var(--issue)}
+  .san-done .big svg{width:46px;height:46px}
+  .san-done h2{font-size:25px;margin:0 0 8px;font-weight:800}
+  .san-done p{margin:0 auto 14px;color:var(--ink-2);font-size:16px;max-width:30ch}
+  .san-done .ref{display:inline-block;margin-bottom:20px}
 
   .done-screen{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:30px 24px 60px}
   .done-screen .big{width:120px;height:120px;border-radius:50%;background:var(--good-tint);border:2px solid var(--good-line);display:grid;place-items:center;color:var(--good);margin-bottom:24px;box-shadow:0 0 0 11px rgba(26,142,82,.06);animation:pop .5s cubic-bezier(.2,.9,.3,1.2) both}
@@ -311,6 +354,7 @@
     <div class="tabpane hide" id="paneInside"></div>
     <div class="tabpane hide" id="paneIssues"></div>
     <div class="tabpane hide" id="paneReports"></div>
+    <div class="tabpane hide" id="paneOthers"></div>
   </main>
 
   <!-- SUMMARY -->
@@ -336,6 +380,7 @@
     <button class="tabbtn" data-tab="inside"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9"/><path d="M3 9a2.4 2.4 0 0 0 4.5 0 2.4 2.4 0 0 0 4.5 0 2.4 2.4 0 0 0 4.5 0A2.4 2.4 0 0 0 21 9"/></svg>Inside</button>
     <button class="tabbtn" data-tab="issues"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>Issues<span class="badge hide" id="issBadge">0</span></button>
     <button class="tabbtn" data-tab="reports"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><line x1="8.5" y1="10" x2="15.5" y2="10"/><line x1="8.5" y1="13.5" x2="15.5" y2="13.5"/><line x1="8.5" y1="17" x2="12.5" y2="17"/></svg>Reports</button>
+    <button class="tabbtn" data-tab="others"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>Others</button>
   </nav>
 </div>
 
@@ -364,6 +409,8 @@ const I = {
   store:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9"/><path d="M3 9a2.4 2.4 0 0 0 4.5 0 2.4 2.4 0 0 0 4.5 0 2.4 2.4 0 0 0 4.5 0A2.4 2.4 0 0 0 21 9"/><path d="M9 20v-5h6v5"/></svg>',
   camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h1.6l1-1.6a1 1 0 0 1 .85-.4h5.1a1 1 0 0 1 .85.4L17.4 6H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="12.5" r="3.2"/></svg>',
   upload:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="m7.5 8.5 4.5-4.5 4.5 4.5"/><path d="M5 16v2.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V16"/></svg>',
+  shield:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>',
+  chevR:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>',
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
   flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>',
   alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>',
@@ -485,10 +532,12 @@ function setTab(tab){
   el('paneInside').classList.toggle('hide', tab!=='inside');
   el('paneIssues').classList.toggle('hide', tab!=='issues');
   el('paneReports').classList.toggle('hide', tab!=='reports');
+  el('paneOthers').classList.toggle('hide', tab!=='others');
   document.querySelectorAll('.tabbtn').forEach(b => b.classList.toggle('on', b.dataset.tab===tab));
   window.scrollTo({top:0, behavior:'instant'});
   if(tab==='issues') loadIssues();
   if(tab==='reports') loadReports();
+  if(tab==='others') renderOthers();
 }
 document.querySelectorAll('.tabbtn').forEach(b => b.addEventListener('click', () => setTab(b.dataset.tab)));
 
@@ -820,6 +869,102 @@ function renderReports(){
   });
 }
 function setRepStation(s){ reportsStation=s; renderReports(); }
+
+const SANITARY = [
+ {name:'Permits and certificates', items:['Valid NYC Food Service Establishment permit posted','Food Protection Certificate holder present during food operations','Current letter grade or Grade Pending card posted properly','Pest control records available','Thermometer available and working','Refrigeration temperature logs, if used','Receipts and invoices for food source available']},
+ {name:'Food temperatures', items:['Cold food 41°F or below','Smoked or processed fish 38°F or below','Shell eggs held at 45°F or below','Hot food held at 140°F or above','Reheated food reaches 165°F for 15 seconds within 2 hours','Cooling correct: 140°F to 70°F within 2 hours, then 70°F to 41°F within 4 more hours']},
+ {name:'Food source and condition', items:['Food from approved commercial source only','No home-cooked food','No spoiled, expired, leaking, swollen, rusted, or dented cans','Shellfish tags kept properly','Eggs clean and not cracked','Milk and dairy pasteurized','Fruits and vegetables washed before cutting or serving','Consumer advisory shown for raw or undercooked items if served']},
+ {name:'Cross-contamination', items:['Raw chicken, meat, seafood stored below ready-to-eat foods','Separate cutting boards and knives for raw and cooked foods','No raw meat dripping onto vegetables or cooked food','Food covered and protected','No food stored on the floor','No food stored under leaking pipes','Chemicals stored away from food','Ice machine clean and ice scoop stored properly','No re-serving food returned from customers']},
+ {name:'Handwashing and employee hygiene', items:['Handwash sink accessible, not blocked','Hot and cold running water at handwash sink','Soap available','Paper towels or hand dryer available','Employees wash hands at all required times','Gloves changed when contaminated','No bare-hand contact with ready-to-eat food','Hair restraints worn','Clean clothing and aprons','No sick worker handling food','Cuts or wounds covered properly']},
+ {name:'Cooking, cooling, reheating, storage', items:['Cooked food not left at room temperature too long','Food cooled in shallow pans','No large hot containers placed directly into the fridge','Prepared foods labeled and dated','Proper FIFO, first in first out','Food kept covered','Food stored at least 6 inches off the floor','Food-grade containers only','No reused cardboard boxes for prepared food','No grocery bags touching ready-to-eat food']},
+ {name:'Equipment and utensils', items:['3-compartment sink or approved dishwasher','Proper wash, rinse, sanitize setup','Sanitizer available at correct concentration','Test strips available','Cutting boards not deeply grooved','Food-contact surfaces smooth and washable','No broken, cracked, or chipped containers','No dirty knives, slicers, tongs, trays, pans','Deli slicer cleaned properly','Soda nozzles, coffee machines, ice machine clean','Thermometers in fridges and freezers','Accurate food probe thermometer available']},
+ {name:'Pest control', items:['No live roaches, mice, rats, or flies','No fresh droppings','No dead insects or rodents','No holes or gaps under doors','Back door closes tightly','Floor drains clean','Garbage covered','Grease and food waste controlled','Pest control log available','No standing water','No clutter in basement or storage areas']},
+ {name:'Cleaning and facility maintenance', items:['Floors clean, especially under equipment','Walls and ceilings clean','No grease buildup','No mold or mildew','No sewage backup','No leaking pipes over food or food-contact areas','Garbage area clean','Restroom clean and supplied','Toilet paper available','Self-closing restroom door where required','Ventilation and hood clean','Lights protected where needed','No personal items stored with food']},
+ {name:'Water, plumbing, sewage, gas', items:['Potable water available','Hot and cold running water','No cross-connection','No sewage backup','Wastewater disposed properly','Hand sinks working','Dish sinks working','No carbon monoxide issue','No harmful gas or vapor detected']},
+ {name:'Customer-facing requirements', items:['Letter grade posted clearly','Menu calorie labeling where it applies to chains','Sodium warning icon where it applies to chains with 15 or more locations','No smoking and no vaping signs where required','Allergen and food safety notices where applicable']}
+];
+let othersView='menu', sanState={}, sanSubmitting=false;
+function sanSecCounts(si){ let a=0,f=0; const t=SANITARY[si].items.length; SANITARY[si].items.forEach((it,ii)=>{ const v=sanState[si+'_'+ii]; if(v) a++; if(v==='no') f++; }); return {answered:a, total:t, flagged:f}; }
+function sanSecHint(si){ const c=sanSecCounts(si); return c.answered+' of '+c.total+' answered'+(c.flagged?(' · '+c.flagged+' flagged'):''); }
+function sanSecCls(si){ const c=sanSecCounts(si); return c.flagged>0?'issue':(c.answered===c.total?'good':'todo'); }
+function sanSecTxt(si){ const c=sanSecCounts(si); return c.flagged>0?(c.flagged+' flagged'):(c.answered===c.total?'Clear':(c.answered+'/'+c.total)); }
+function sanTotals(){ let a=0,t=0,v=0; SANITARY.forEach((sec,si)=>sec.items.forEach((it,ii)=>{ t++; const x=sanState[si+'_'+ii]; if(x) a++; if(x==='no') v++; })); return {answered:a, total:t, violations:v}; }
+function openSanitary(){ othersView='sanitary'; renderOthers(); window.scrollTo({top:0, behavior:'instant'}); }
+function closeSanitary(){ othersView='menu'; renderOthers(); window.scrollTo({top:0, behavior:'instant'}); }
+function renderOthers(){
+  const pane = el('paneOthers');
+  if(othersView!=='sanitary'){
+    pane.innerHTML = `
+      <div class="lead"><h2>Other reports</h2><p>Extra checklists for this station.</p></div>
+      <button class="menu-card" onclick="openSanitary()">
+        <span class="menu-ic">${I.shield}</span>
+        <span class="menu-body"><span class="menu-title">Sanitary Inspection</span><span class="menu-sub">NYC health checklist, tap Yes or No</span></span>
+        <span class="menu-chev">${I.chevR}</span>
+      </button>
+      <div class="menu-soon">More coming soon</div>`;
+    return;
+  }
+  let secs = '';
+  SANITARY.forEach((sec, si) => {
+    let items = '';
+    sec.items.forEach((it, ii) => {
+      const v = sanState[si+'_'+ii];
+      items += `<div class="san-item"><span class="san-text">${it}</span><span class="san-yn"><button id="sy_${si}_${ii}" class="yn ${v==='yes'?'on-yes':''}" onclick="setSan(${si},${ii},'yes')">Yes</button><button id="sn_${si}_${ii}" class="yn ${v==='no'?'on-no':''}" onclick="setSan(${si},${ii},'no')">No</button></span></div>`;
+    });
+    secs += `<section class="card" data-san-sec="${si}"><button class="card-head" onclick="toggleSanSec(${si})"><span class="ic"><span class="san-num">${si+1}</span></span><span class="card-title"><span class="name">${sec.name}</span><span class="hint" id="sh_${si}">${sanSecHint(si)}</span></span><span class="status ${sanSecCls(si)}" id="ss_${si}">${sanSecTxt(si)}</span><span class="chev"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></span></button><div class="body"><div class="body-pad"><button class="san-allyes" onclick="markAllYes(${si})">${I.check} Mark all Yes</button><div class="san-items">${items}</div></div></div></section>`;
+  });
+  pane.innerHTML = `<button class="san-back" onclick="closeSanitary()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg> Other reports</button><div class="lead"><h2>Sanitary Inspection</h2><p>NYC health self-check. Tap Yes or No on each line.</p></div><div class="san-summary" id="sanSummary"></div><div id="sanSecs">${secs}</div><div class="finish-wrap" id="sanFinish"></div>`;
+  updateSanSummary(); renderSanFinish();
+}
+function toggleSanSec(si){
+  const card = document.querySelector('[data-san-sec="'+si+'"]'); if(!card) return;
+  const wasOpen = card.classList.contains('open');
+  document.querySelectorAll('[data-san-sec]').forEach(c=>c.classList.remove('open'));
+  if(!wasOpen){ card.classList.add('open'); setTimeout(()=>card.scrollIntoView({behavior:'smooth',block:'nearest'}),60); }
+}
+function setSan(si, ii, val){
+  sanState[si+'_'+ii] = val;
+  const y = el('sy_'+si+'_'+ii), n = el('sn_'+si+'_'+ii);
+  if(y) y.classList.toggle('on-yes', val==='yes');
+  if(n) n.classList.toggle('on-no', val==='no');
+  updateSanSecHint(si); updateSanSummary(); renderSanFinish();
+}
+function markAllYes(si){
+  SANITARY[si].items.forEach((it, ii) => { sanState[si+'_'+ii]='yes'; const y=el('sy_'+si+'_'+ii), n=el('sn_'+si+'_'+ii); if(y) y.classList.add('on-yes'); if(n) n.classList.remove('on-no'); });
+  updateSanSecHint(si); updateSanSummary(); renderSanFinish();
+}
+function updateSanSecHint(si){
+  const hh = el('sh_'+si); if(hh) hh.textContent = sanSecHint(si);
+  const s = el('ss_'+si); if(s){ s.className = 'status '+sanSecCls(si); s.textContent = sanSecTxt(si); }
+}
+function updateSanSummary(){
+  const t = sanTotals(); const band = t.violations<=13?'good':t.violations<=27?'warn':'bad';
+  const bandTxt = t.violations<=13?'A range (0-13)':t.violations<=27?'B range (14-27)':'C range (28+)';
+  const box = el('sanSummary'); if(!box) return;
+  box.innerHTML = `<div class="san-sum-main"><span class="san-vnum ${band}">${t.violations}</span><span class="san-vlabel">violation${t.violations===1?'':'s'}</span></div><div class="san-sum-side"><div class="san-band ${band}">${bandTxt}</div><div class="san-prog">${t.answered} of ${t.total} answered</div></div>`;
+}
+function renderSanFinish(){
+  const t = sanTotals(); const box = el('sanFinish'); if(!box) return;
+  box.innerHTML = `<button class="btn btn-primary" id="sanSubmitBtn" onclick="submitSanitary()">Submit sanitary report</button><div class="finish-note"><b>${t.violations}</b> violation${t.violations===1?'':'s'} · ${t.answered} of ${t.total} answered</div>`;
+}
+async function submitSanitary(){
+  if(sanSubmitting) return; sanSubmitting=true;
+  const btn = el('sanSubmitBtn'); if(btn){ btn.disabled=true; btn.textContent='Submitting…'; }
+  const t = sanTotals(); const violationList = [];
+  SANITARY.forEach((sec,si)=>sec.items.forEach((it,ii)=>{ if(sanState[si+'_'+ii]==='no') violationList.push({section:sec.name, item:it}); }));
+  const payload = { action:'sanitary', station:state.station, inspector:state.inspector, timestamp:new Date().toISOString(), answered:t.answered, total:t.total, violations:t.violations, violationList:violationList };
+  try{
+    const res = await fetch(ENDPOINT, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(payload) });
+    const d = await res.json();
+    if(!d || !d.ok) throw new Error((d&&d.error)||'server did not confirm');
+    sanResult(d.ref, t.violations);
+  }catch(err){ sanSubmitting=false; if(btn){ btn.disabled=false; btn.textContent='Retry submit'; } alert('Could not submit: '+(err.message||err)); }
+}
+function sanResult(ref, violations){
+  sanState={}; sanSubmitting=false; othersView='menu';
+  el('paneOthers').innerHTML = `<div class="san-done"><div class="big ${violations>0?'flagged':''}">${violations>0?I.flag:I.check}</div><h2>Sanitary report sent</h2><p>${violations>0?(violations+' violation'+(violations===1?'':'s')+' flagged and emailed to the office.'):'No violations. The report was emailed to the office.'}</p><div class="ref">REF ${ref}</div><button class="btn btn-ghost" style="max-width:300px" onclick="renderOthers()">Back to Other reports</button></div>`;
+  window.scrollTo({top:0, behavior:'instant'});
+}
 
 show('start');
 </script>

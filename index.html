@@ -136,6 +136,7 @@
   .addphoto svg{width:22px;height:22px}
   .addphoto.full{width:100%;height:104px;flex-direction:row;gap:11px;font-size:15px}
   .addphoto.full svg{width:26px;height:26px}
+  .addphoto.full.half{flex:1 1 0;width:auto;height:96px}
 
   .decide{display:flex;gap:10px}
   .dbtn{flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;font-weight:700;font-size:15px;padding:14px 12px;border-radius:14px;min-height:54px;border:1.5px solid var(--line-2);background:var(--surface);color:var(--ink);transition:all .13s ease}
@@ -339,6 +340,7 @@
 </div>
 
 <input type="file" id="fileInput" accept="image/*" capture="environment" multiple style="display:none">
+<input type="file" id="fileInputGallery" accept="image/*" multiple style="display:none">
 
 <script>
 const ENDPOINT = "https://script.google.com/macros/s/AKfycbyDSBaYgHFKRW1qKWxe7YDv5MfQWd4jvu1LY7AAhav5c2V2_qvNOctRD_BiFR3Ikoyj/exec";
@@ -361,6 +363,7 @@ const I = {
   items:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2 12.5a1.5 1.5 0 0 0 1.5 1.2h9.6a1.5 1.5 0 0 0 1.5-1.2L21 7H5.2"/></svg>',
   store:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9 4.5 4h15L21 9"/><path d="M3 9v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V9"/><path d="M3 9a2.4 2.4 0 0 0 4.5 0 2.4 2.4 0 0 0 4.5 0 2.4 2.4 0 0 0 4.5 0A2.4 2.4 0 0 0 21 9"/><path d="M9 20v-5h6v5"/></svg>',
   camera:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8a2 2 0 0 1 2-2h1.6l1-1.6a1 1 0 0 1 .85-.4h5.1a1 1 0 0 1 .85.4L17.4 6H19a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2Z"/><circle cx="12" cy="12.5" r="3.2"/></svg>',
+  upload:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="m7.5 8.5 4.5-4.5 4.5 4.5"/><path d="M5 16v2.5A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5V16"/></svg>',
   check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
   flag:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V4s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>',
   alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg>',
@@ -408,6 +411,7 @@ resetState();
 const el = id => document.getElementById(id);
 const screens = {start:el('startScreen'), app:el('appScreen'), summary:el('summaryScreen'), done:el('doneScreen')};
 const fileInput = el('fileInput');
+const galleryInput = el('fileInputGallery');
 let activePhotoTarget = null;
 let selectedStation = '';
 
@@ -541,27 +545,30 @@ function renderPhotos(id){
   if(!box) return;
   const photos = state.items[id].photos;
   box.innerHTML = '';
-  if(photos.length===0){
-    const add = document.createElement('button'); add.className='addphoto full';
-    add.innerHTML = `${I.camera}<span>Take photo</span>`;
-    add.onclick = () => pickPhoto(id); box.appendChild(add); return;
-  }
   photos.forEach((p,i) => {
     const t = document.createElement('div'); t.className='thumb';
     t.innerHTML = `<img src="${p.url}" alt=""><button class="rm" aria-label="Remove photo">&times;</button>`;
     t.querySelector('.rm').onclick = e => { e.stopPropagation(); URL.revokeObjectURL(p.url); state.items[id].photos.splice(i,1); renderPhotos(id); };
     box.appendChild(t);
   });
-  const add = document.createElement('button'); add.className='addphoto';
-  add.innerHTML = `${I.plus}<span>Add</span>`; add.onclick = () => pickPhoto(id); box.appendChild(add);
+  const big = photos.length===0;
+  const cam = document.createElement('button'); cam.className = 'addphoto' + (big?' full half':'');
+  cam.innerHTML = `${I.camera}<span>${big?'Take photo':'Camera'}</span>`;
+  cam.onclick = () => pickPhoto(id, 'cam');
+  const up = document.createElement('button'); up.className = 'addphoto' + (big?' full half':'');
+  up.innerHTML = `${I.upload}<span>Upload</span>`;
+  up.onclick = () => pickPhoto(id, 'gallery');
+  box.appendChild(cam); box.appendChild(up);
 }
 
-function pickPhoto(id){ activePhotoTarget = id; fileInput.value=''; fileInput.click(); }
-fileInput.addEventListener('change', () => {
+function pickPhoto(id, mode){ activePhotoTarget = id; const inp = (mode==='gallery') ? galleryInput : fileInput; inp.value=''; inp.click(); }
+function onPicked(inp){
   if(!activePhotoTarget) return;
-  Array.from(fileInput.files || []).forEach(f => { if(f.type.startsWith('image/')) state.items[activePhotoTarget].photos.push({file:f, url:URL.createObjectURL(f)}); });
+  Array.from(inp.files || []).forEach(f => { if(f.type.startsWith('image/')) state.items[activePhotoTarget].photos.push({file:f, url:URL.createObjectURL(f)}); });
   renderPhotos(activePhotoTarget); activePhotoTarget = null;
-});
+}
+fileInput.addEventListener('change', () => onPicked(fileInput));
+galleryInput.addEventListener('change', () => onPicked(galleryInput));
 
 el('appScreen').addEventListener('click', e => {
   const head = e.target.closest('.card-head');

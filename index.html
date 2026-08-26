@@ -712,7 +712,7 @@ el('backBtn').addEventListener('click', () => { if(!screens.summary.classList.co
 
 // ---- submit ----
 function fileToBase64Resized(file, maxDim, quality){
-  maxDim=maxDim||1280; quality=quality||0.72;
+  maxDim=maxDim||1152; quality=quality||0.68;
   return new Promise((resolve,reject)=>{
     const url=URL.createObjectURL(file); const img=new Image();
     img.onload=()=>{ let w=img.width,h=img.height; if(Math.max(w,h)>maxDim){ const s=maxDim/Math.max(w,h); w=Math.round(w*s); h=Math.round(h*s);} const c=document.createElement('canvas'); c.width=w; c.height=h; c.getContext('2d').drawImage(img,0,0,w,h); URL.revokeObjectURL(url); resolve(c.toDataURL('image/jpeg',quality).split(',')[1]); };
@@ -728,29 +728,50 @@ async function buildPayload(onProgress){
     sections:{ outside:{complete:sectionComplete('outside')}, inside:{complete:sectionComplete('inside')} },
     checked, total, issues: items.filter(i=>i.status==='issue').length, items };
 }
+function fetchReportsList(){
+  const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),15000);
+  return fetch(ENDPOINT + '?type=reports&nocache=1&v=' + Date.now(), {signal:ctrl.signal}).then(r=>r.json()).then(d=>(d&&d.reports)?d.reports:[]).finally(()=>clearTimeout(t));
+}
+async function pollForReport(known, haveSnap, station, inspector, ms){
+  const end = Date.now()+ms;
+  while(Date.now()<end){
+    await new Promise(r=>setTimeout(r,6000));
+    try{
+      const reps = await fetchReportsList();
+      const hit = reps.find(x=> x.station===station && x.inspector===inspector && (haveSnap ? !known.has(x.ref) : false));
+      if(hit) return hit;
+    }catch(e){}
+  }
+  return null;
+}
 async function submitReport(){
   const btn=el('submitBtn');
   const total=SECTIONS.reduce((n,s)=>n+s.items.reduce((m,it)=> state.items[it.id].status!=='todo' ? m+state.items[it.id].photos.length : m,0),0);
   if(!state.subId) state.subId = 'sub-' + Date.now().toString(36) + '-' + Math.random().toString(36).slice(2,7);
   const e0=el('subErr'); if(e0) e0.textContent='';
   btn.disabled=true; btn.textContent = total ? 'Preparing photos…' : 'Submitting…';
+  const known = new Set();
+  const snap = fetchReportsList().then(reps=>{ reps.forEach(x=>known.add(x.ref)); return true; }).catch(()=>false);
   try{
     const payload=await buildPayload(n=>{ btn.textContent=`Compressing photo ${n} of ${total}…`; });
     payload.subId = state.subId;
     btn.textContent = 'Sending report…';
-    const ctrl = new AbortController();
-    const timer = setTimeout(()=>ctrl.abort(), 120000);
-    let res;
-    try{ res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),signal:ctrl.signal}); }
-    finally{ clearTimeout(timer); }
-    const data=await res.json();
-    if(!data || !data.ok) throw new Error((data&&data.error)||'server did not confirm');
-    state.subId=null;
-    finishDone(data.ref, data.folderUrl);
+    const haveSnap = await snap;
+    let data=null;
+    try{
+      const ctrl=new AbortController(); const timer=setTimeout(()=>ctrl.abort(),45000);
+      let res; try{ res=await fetch(ENDPOINT,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(payload),signal:ctrl.signal}); } finally{ clearTimeout(timer); }
+      data=await res.json();
+    }catch(e){ data=null; }
+    if(data && data.ok){ state.subId=null; finishDone(data.ref, data.folderUrl); return; }
+    btn.textContent='Confirming report…';
+    const hit = await pollForReport(known, haveSnap, state.station, state.inspector, 110000);
+    if(hit){ state.subId=null; finishDone(hit.ref, hit.folder); return; }
+    throw new Error(haveSnap ? 'not-saved' : 'unconfirmed');
   }catch(err){
     btn.disabled=false; btn.textContent='Retry submit';
     let e=el('subErr'); if(!e){ e=document.createElement('div'); e.id='subErr'; e.className='finish-note'; e.style.color='var(--issue)'; btn.parentNode.insertBefore(e,btn.nextSibling); }
-    e.textContent = (err && err.name==='AbortError') ? 'Weak signal, this took too long. Your photos may already be saved. Tap Retry, it will not make a duplicate.' : ('Could not send: '+(err.message||err)+'. Tap Retry when you have signal.');
+    e.textContent = (err && err.message==='unconfirmed') ? 'Sent, but the signal was too weak to confirm. Open the Reports tab to check if it saved before tapping Retry.' : 'Could not send on this signal. Move to better signal, then tap Retry. It checks first, so it will not duplicate.';
   }
 }
 el('submitBtn').addEventListener('click', submitReport);
